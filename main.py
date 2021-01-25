@@ -19,17 +19,20 @@ def main():
     split_len_str = len_str.split("node")
 
     for i in split_len_str:
+        flag = True
         for j in range(len(name_list)):
-            arr_name_equals = name_list[j].split(";")
+            arr_name_equals = name_list[j].split("; ")
             for x in arr_name_equals:
                 if i.find(label + '"' + x + '"' + n) != -1:
                     name_list[j] = "0"
-                    new = i.replace(faculty + '"1"' + n, faculty + '"' + f_list[j] + '"' + n)
-                    new = new.replace(f_department + '"2"' + n, f_department + '"' + dep_list[j] + '"' + n)
+                    new = i.replace(faculty + '"1"' + n, faculty + '"' + str(f_list[j]) + '"' + n)
+                    new = new.replace(f_department + '"2"' + n, f_department + '"' + str(dep_list[j]) + '"' + n)
                     arr_for_out.append(new)
-        arr_for_out.append(i)
+                    flag = False
+        if flag:
+            arr_for_out.append(i)
 
     out_str = "node".join(arr_for_out)
 
     f = open('out.txt', 'w')
-    f.write(out_str[:-6])
+    f.write(out_str)
